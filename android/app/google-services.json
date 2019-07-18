@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "446032612592",
+    "firebase_url": "https://s2sapp-414df.firebaseio.com",
+    "project_id": "s2sapp-414df",
+    "storage_bucket": "s2sapp-414df.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446032612592:android:71afb08dec721d0d",
+        "android_client_info": {
+          "package_name": "com.s2s"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446032612592-j140c9bke2gqfu7opvo1pk27g33897t0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.s2s",
+            "certificate_hash": "ab052908a3bbf5223b266ea4566689bcd56a1d08"
+          }
+        },
+        {
+          "client_id": "446032612592-kij1baa7boavpcv66lppnlnejv6g4l9n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.s2s",
+            "certificate_hash": "c1929e7184417f5e213e1dfbe75db358a1ed83a4"
+          }
+        },
+        {
+          "client_id": "446032612592-34qhs2ldijgkoei1s7nm34neuilugtdv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnXDYKp0neFseEYu6UuxmqHDtS68okcbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446032612592-34qhs2ldijgkoei1s7nm34neuilugtdv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
