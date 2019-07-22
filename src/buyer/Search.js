@@ -38,7 +38,6 @@ class Search extends Component {
             images={wears}
             columns={2}
             onPressImage={(data)=>{navigate('ViewWear',{data:data})}}
-
         />
          </View>
         </ScrollView>

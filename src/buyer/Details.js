@@ -5,8 +5,8 @@ import SlidingUpPanel from 'rn-sliding-up-panel';
 import Headroom from 'react-native-headroom';
 import { Colors, AwesomeIcon, Styles, ModalWant} from '../bootstrap'; 
 import { Connect,mapDispatchToProps,mapStateToProps } from '../Redux';
+import ImagePicker from 'react-native-image-picker';
 import { apiData } from '../functions';
-
 
 const { height } = Dimensions.get("window");
 
@@ -15,6 +15,7 @@ class Details extends Component {
     super(props);
     this.state = {
         item:'',
+        ImageSource: ''
     };
     this.openModal=this.openModal.bind(this);
   }
@@ -24,6 +25,43 @@ class Details extends Component {
       
   }
  
+  launchImagePicker(){
+
+    const options = {
+      quality: 1.0,
+      maxWidth: 500,
+      maxHeight: 500,
+      storageOptions: {
+        skipBackup: true
+      }
+    };
+
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled photo picker');
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      }
+      else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      }
+      else {
+        let source = { uri: response.uri };
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+        alert(JSON.stringify(source)) 
+        this.setState({
+
+          ImageSource: source 
+
+        });
+      }
+    });
+  }
+
   _renderDotIndicator(){
     return <PagerDotIndicator pageCount={3}
     dotStyle={{backgroundColor:Colors.black}}
@@ -124,10 +162,12 @@ class Details extends Component {
                   </ScrollView>
                 </View>
 
-                <View style={{alignItems:'center',paddingTop:30,}}>
+                <View style={{paddingTop:30,}}> 
+                <View style={{alignItems:'center'}}> 
                   <Text style={{color:Colors.black}}>ONFEET</Text>
                   <Text style={{color:Colors.black,paddingTop:15,fontSize:15}}>Show off how you wear yours</Text>
-                  <TouchableOpacity>
+                </View>
+                  <TouchableOpacity onPress={()=>this.launchImagePicker()}>
                     <View style={[styles.button]}>
                       <Text>ADD PHOTO</Text>
                     </View>
@@ -207,9 +247,10 @@ const styles = StyleSheet.create({
       alignItems:'center',
       height:60,
     },
-    button:{height:50,
-      width:'70%',
+    button:{
+      height:50,
       marginTop:15,
+      marginHorizontal:20,
       alignItems:'center',
       justifyContent:'center',
       borderColor:Colors.black,

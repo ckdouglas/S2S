@@ -10,11 +10,10 @@ import {
   Welcome, Sign_Up ,PasswordReset,ProfileSetUp, Home, Browse, Search, Sell, Profile, PhoneVerification, UserPersonalization, Confirmation, Details,
   CheckOut, MoreSizes, Offer, OwnItem, ViewWear, ProfileSettings,
   
-  Auth_ ,PersonalInfor,ReturnAddress,
+  Auth_ ,PersonalInfor,ReturnAddress, Seller101,
   
   AwesomeIcon, Colors,
 } from './bootstrap';
-
 
 const TabNavigator = createBottomTabNavigator({
   Home: Home,
@@ -77,6 +76,7 @@ const AppNavigator = createStackNavigator({
     Auth_:{screen:Auth_},
     PersonalInfor:{screen:PersonalInfor},
     ReturnAddress:{screen:ReturnAddress},
+    Seller101:{screen:Seller101}
 
 },{
     headerMode:'none',

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import {  View, Text, StatusBar,StyleSheet ,TouchableOpacity,TouchableHighlight} from 'react-native';
+import {  View, Text, StatusBar,StyleSheet ,TouchableOpacity,Image,TouchableWithoutFeedback} from 'react-native';
 import {Connect,mapDispatchToProps,mapStateToProps} from '../Redux';
 import {Colors,AwesomeIcon, Styles} from '../bootstrap';
 
  class Sell extends Component {
   
   menu_items = ['personal info','return address','seller 101','link social accounts'];
-
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -16,6 +16,7 @@ import {Colors,AwesomeIcon, Styles} from '../bootstrap';
   render() {
     const { user,navigation} = this.props;
     const { navigate } = navigation;
+    buttons = ['sign up','login'];
 
     return (
       user?
@@ -37,7 +38,7 @@ import {Colors,AwesomeIcon, Styles} from '../bootstrap';
                 {
                     this.menu_items.map((item,index)=>(
                       <View style={{width:'90%',borderBottomWidth:1,borderBottomColor:Colors.border_color,marginHorizontal:20}}>
-                      <TouchableOpacity  onPress={()=>navigate(index==0?'PersonalInfor':index==1?'ReturnAddress':null)}> 
+                      <TouchableOpacity  onPress={()=>navigate(index==0?'PersonalInfor':index==1?'ReturnAddress':index==2?'Seller101':'SocialAccounts')}> 
                         <View key={index} style={{width:'90%',flexDirection:'row',paddingLeft:20,height:60}}> 
                                   <View style={{width:'15%',alignItems:'center',justifyContent:'center'}}>
                                   <AwesomeIcon name={'plus-circle'} size={20} color={Colors.gray}/>    
@@ -59,8 +60,30 @@ import {Colors,AwesomeIcon, Styles} from '../bootstrap';
           </TouchableOpacity> 
       </View>
       :
-      <View>
-        <Text>Noe user</Text>
+      <View style={{flex:1}}>
+
+        <View style={{flex:10,alignItems:'center',justifyContent:'center',borderBottomColor:Colors.black,borderBottomWidth:1}}>
+            <Text style={{color:Colors.black}}>SELL</Text>
+        </View>
+       
+        <View style={{flex:60,alignItems:'center',justifyContent:'center',marginHorizontal:30}}>
+            <View style={{width:100,height:100}}>
+                 <Image  style={{height:null, width:null,flex:1, resizeMode:'contain'}} source={require('../assets/images/logo.png')}/>
+            </View>
+            <Text style={{textAlign:'center',color:Colors.black}}>Apply to sell by registering or logging in.Only approved sellers are permitted to list</Text>
+        </View>
+
+        <View style={{flex:30,alignItems:'center',justifyContent:'center'}}>
+            {
+                 buttons.map((button,index)=>(
+                    <TouchableWithoutFeedback key={index} onPress={()=>navigate('Auth_',{page:button})}>
+                        <View style={[styles.button,{marginBottom:(button==buttons[0]? 10:null)}]}>
+                            <Text style={{color:Colors.black}}>{button.toUpperCase()}</Text>
+                        </View>
+                    </TouchableWithoutFeedback>
+                ))
+            }
+        </View>
       </View>
     );
   }

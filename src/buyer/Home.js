@@ -54,7 +54,7 @@ class Home extends Component {
               {/* popular */}
               <View style={styles.content1}>
               <View style={[styles.menu_bar,{marginHorizontal:20}]}>
-                <Text style={{color:Colors.white,fontWeight:'500'}}>Popular Brands</Text>                  
+                <Text style={{color:Colors.black,fontWeight:'500'}}>Popular Brands</Text>                  
                 <TouchableWithoutFeedback onPress={()=>alert('Popular  ')}>
                 <View style={styles.menu_bar1}><Text>See All  </Text><AwesomeIcon name={'angle-right'} size={23}/></View>
                 </TouchableWithoutFeedback>

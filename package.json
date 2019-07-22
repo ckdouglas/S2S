@@ -17,6 +17,7 @@
     "react-native-gesture-handler": "^1.3.0",
     "react-native-google-signin": "^2.0.0",
     "react-native-headroom": "^1.0.1",
+    "react-native-image-picker": "^0.28.0",
     "react-native-maps": "^0.25.0",
     "react-native-masonry-list": "^2.11.1",
     "react-native-modalbox": "^1.7.1",

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet,StatusBar,TouchableOpacity,ScrollView,Dimensions,TouchableWithoutFeedback} from 'react-native';
-import {colors} from '../../contants/theme';
-import Icon from '../../components/Icon';
-import Iconn from '../../components/Iconn';
+import { Colors, AwesomeIcon, IonicIcon} from '../bootstrap'
 
 export default class Seller101 extends Component {
   constructor(props) {
@@ -12,21 +10,24 @@ export default class Seller101 extends Component {
   }
 
   render() {
+    const { navigation} = this.props;
+    const { navigate, goBack} = navigation; 
     return (
-      <View style={{flex:1,backgroundColor:colors.black}}>
-      <StatusBar backgroundColor={colors.black}/>
+      <View style={{flex:1,backgroundColor:Colors.black}}>
+      <StatusBar backgroundColor={Colors.black}/> 
         <View style={styles.nav}>
-        <Text/>  
-        <Text/>
-         <TouchableOpacity>
-             <Icon name={'close'} size={25} color={colors.white}/>
+        <TouchableOpacity onPress={()=>goBack()}>
+             <AwesomeIcon name={'arrow-left'} size={25} color={Colors.white}/>
         </TouchableOpacity>
+        <Text/>
+         <Text/>
         </View>
         <View style={{flex:1}}>
         <View style={{height:'25%'}}>
         </View>
-        <View style={{height:'30%',paddingHorizontal:35}}>
-            <Text style={{color:colors.white,textAlign:'center'}}>
+        <View style={{height:'30%',paddingHorizontal:35,alignItems:'center'}}>
+            <Text style={{color:Colors.white,fontSize:18}}>SELLER 101</Text>
+            <Text style={{color:Colors.white,textAlign:'center'}}>
                 Please review the following exaples to avoid listing issues.
                 Each listing is checked and by a verification specialist,
                 so getting farmilar with our policies will save you time
@@ -34,12 +35,15 @@ export default class Seller101 extends Component {
             </Text>
         </View>
         </View>
-        <View style={{alignItems:'center',justifyContent:'center'}}>
-            <View style={styles.round_button}>
-                <Text/> 
-                <Text style={{color:colors.white}}>OK</Text>
-                <Iconn name={'angle-down'} color={colors.white} size={25}/>   
-            </View>
+
+        <View style={{alignItems:'center',justifyContent:'center',marginBottom:20}}>
+            <TouchableOpacity onPress={()=>alert('wertyu')}>
+              <View style={styles.round_button}>
+                  <Text/> 
+                  <Text style={{color:Colors.white}}>OK</Text>
+                  <AwesomeIcon name={'angle-down'} color={Colors.white} size={25}/>   
+              </View>
+            </TouchableOpacity>
         </View>
       </View>
     );
