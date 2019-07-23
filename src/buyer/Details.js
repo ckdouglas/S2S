@@ -54,9 +54,7 @@ class Details extends Component {
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
         alert(JSON.stringify(source)) 
         this.setState({
-
           ImageSource: source 
-
         });
       }
     });
