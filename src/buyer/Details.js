@@ -142,7 +142,7 @@ class Details extends Component {
                         return(
                         <View key={index} style={[styles.item_style,Styles.bottom_border]}>
                         <Text>{label}</Text>
-                        <Text style={{color:Colors.black}}>{item[label]}</Text>
+                        <Text style={{color:Colors.black}}>{ item[label]}</Text> 
                         </View>
                         )
                       }
