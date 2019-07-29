@@ -6,7 +6,7 @@ import Headroom from 'react-native-headroom';
 import { Colors, AwesomeIcon, Styles, ModalWant} from '../bootstrap'; 
 import { Connect,mapDispatchToProps,mapStateToProps } from '../Redux';
 import ImagePicker from 'react-native-image-picker';
-import { apiData } from '../functions';
+import { apiData, handleImageUpload } from '../functions';
 
 const { height } = Dimensions.get("window");
 
@@ -15,7 +15,7 @@ class Details extends Component {
     super(props);
     this.state = {
         item:'',
-        ImageSource: ''
+        photo:''
     };
     this.openModal=this.openModal.bind(this);
   }
@@ -26,39 +26,23 @@ class Details extends Component {
   }
  
   launchImagePicker(){
-
     const options = {
       quality: 1.0,
       maxWidth: 500,
       maxHeight: 500,
       storageOptions: {
-        skipBackup: true
+        skipBackup: true 
       }
     };
 
     ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
-
-      if (response.didCancel) {
-        console.log('User cancelled photo picker');
-      }
-      else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      }
-      else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      }
-      else {
-        let source = { uri: response.uri };
-        // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-        alert(JSON.stringify(source)) 
-        this.setState({
-          ImageSource: source 
-        });
+      if (response.uri) {
+        this.setState({photo:response});
+        handleImageUpload(response,this.state.item._id);
       }
     });
   }
+  
 
   _renderDotIndicator(){
     return <PagerDotIndicator pageCount={3}

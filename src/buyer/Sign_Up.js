@@ -5,10 +5,8 @@ import {Connect,mapDispatchToProps,mapStateToProps} from '../Redux';
 import {LoginManager,AccessToken, } from 'react-native-fbsdk';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import firebase from 'react-native-firebase'; 
-import {googleLogin} from '../functions'
 import { apiData } from '../functions';
 import { saveUser,findAllUsers} from '../Realm';
-import LottieView from 'lottie-react-native';
 
 GoogleSignin.configure({
   scopes: ['https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/profile.agerange.read','https://www.googleapis.com/auth/user.addresses.read','https://www.googleapis.com/auth/userinfo.profile'], // what API you want to access on behalf of the user, default is email and profile
