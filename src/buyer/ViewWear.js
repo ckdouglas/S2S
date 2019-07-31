@@ -49,7 +49,7 @@ class ViewWear extends Component {
         <View style={{height:'20%', flexDirection:'row',justifyContent:'space-between',alignItems:'flex-end',paddingBottom:10}}>
             <View style={{flexDirection:'row'}}>
                 <View style={{marginLeft:10}}>
-                     <Avatar rounded size={'medium'} source={{ uri:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',}}/> 
+                     <Avatar rounded size={'medium'} source={{ uri:user.photoUrl,}}/> 
                 </View>
                 <View style={{marginLeft:15}}>
                     <Text>ONFEET</Text>

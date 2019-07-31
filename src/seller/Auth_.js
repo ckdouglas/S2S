@@ -12,11 +12,12 @@ export default class Auth_ extends Component {
     super(props);
     this.state = {
         activePage:'',
-        inputs:[{label:'email',value:''},{label:'password',value:''}]
+        email:'',
+        password:''
     };
   }
   
-  updateInputText=()=>{
+  updateInputText=(input, text)=>{
     switch (input) {
       case 'email':
         this.setState({email:text})
@@ -64,11 +65,7 @@ export default class Auth_ extends Component {
                    : 
                    this.inputs.map((input,index)=>(
                      <View key={index} style={[styles.input,(activePage=='login' && input=='password'?styles.l_p:null)]}>
-                         <TextInput value={''} placeholder={titleCase(input)} onChangeText={(text)=>{
-                            var inputs = [...inputs];
-                            inputs[index] = {...inputs[index], value:text};
-                            this.setState({inputs: inputs}) 
-                         }} secureTextEntry={index==1}/>
+                         <TextInput value={this.state.input} placeholder={titleCase(input)} name={input} onChangeText={text=>{this.updateInputText(input,text)}} secureTextEntry={index==1}/>
                          {
                            activePage=='login' && input=='password'?
                            <Text style={{fontSize:9,marginLeft:5,position:"relative"}} onPress={()=>this.setState({activePage:'FORGOT'})}>FORGOT</Text>
@@ -86,9 +83,8 @@ export default class Auth_ extends Component {
                    BY PROCEEDING,YOU ACCEPT OUR <Text style={{color:Colors.link}}>TERMS OF SERVICES</Text> AND {'\n'} <Text style={{color:Colors.link}}>PRIVACY POLICIES</Text>
                    </Text>
                  }
-
-            </View>
-            <TouchableWithoutFeedback onPress={activePage=='sign up'?()=>navigate('SellerRequest'):null}>
+            </View> 
+            <TouchableWithoutFeedback onPress={()=>alert(this.state.email + this.state.password)}>
               <View style={styles.button}>
                 <Text style={{color:Colors.black,fontWeight:'500',marginBottom:25}}>{activePage=='FORGOT'?'RESET PASSWORD':activePage.toUpperCase()}</Text>
               </View>

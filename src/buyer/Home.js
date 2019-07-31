@@ -93,7 +93,7 @@ class Home extends Component {
                         <Text style={styles.p}>{item.name}</Text>
                         <Text style={styles.p}>{item.designer}</Text>
                         <Text style={{fontSize:10}}>Lowest Ask</Text>
-                        <Text style={{fontSize:20,color:Colors.black}}>US${item.price}</Text>
+                        <Text style={{fontSize:20,color:Colors.black}}>US ${item.price}</Text>
                         <Text style={{fontSize:10}}>{item.sold} sold</Text>
                       </View>
                       </TouchableOpacity>

@@ -5,7 +5,6 @@ import { GoogleSignin } from 'react-native-google-signin';
 import { apiData } from './functions' 
 import {Connect,mapDispatchToProps,mapStateToProps} from './Redux';
 
-
 import {
   Welcome, Sign_Up ,PasswordReset,ProfileSetUp, Home, Browse, Search, Sell, Profile, PhoneVerification, UserPersonalization, Confirmation, Details,
   CheckOut, MoreSizes, Offer, OwnItem, ViewWear, ProfileSettings,
@@ -88,19 +87,21 @@ const AppNavigator = createStackNavigator({
 });
 
 var AppContainer =  createAppContainer(AppNavigator);
-
- class Application extends Component {
+class Application extends Component {
    // tab navigator
    constructor(props) {
      super(props)
       apiData({action: 'get_shoes'}).then(data=>{
         this.props.setShoes(data)
       }).catch(err=>alert(err));
-   };
-   
-  render() {
+      apiData({action:'get_wears'}).then(data=>{
+        this.props.setWears(data)
+      }).catch(err=>alert(err))
+  };
+
+render() {
     console.disableYellowBox = true;
     return (<AppContainer/>);
-  }
+}
 }
 export default Connect(mapStateToProps,mapDispatchToProps)(Application)

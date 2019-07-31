@@ -125,8 +125,8 @@ class Details extends Component {
                       if ( !(label =='_id') && !(label=='images') && !(label=='brand_id') && !(label=='story') && !(label=='prices'))  {
                         return(
                         <View key={index} style={[styles.item_style,Styles.bottom_border]}>
-                        <Text>{label}</Text>
-                        <Text style={{color:Colors.black}}>{ item[label]}</Text> 
+                        <Text>{label.toUpperCase()}</Text>
+                        <Text style={{color:Colors.black}}>{item[label]}</Text>  
                         </View>
                         )
                       }
