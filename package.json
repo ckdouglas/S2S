@@ -32,7 +32,8 @@
     "redux": "^4.0.1",
     "rn-sliding-up-panel": "^2.3.0",
     "rn-viewpager": "^1.2.9",
-    "toggle-switch-react-native": "^2.0.2"
+    "toggle-switch-react-native": "^2.0.2",
+    "yarn": "^1.17.3"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
