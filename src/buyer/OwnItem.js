@@ -8,7 +8,7 @@ export default class OwnItem extends Component {
     this.state = {
     };
   }
-
+ 
   shoeSizes=()=>{
       let sizes = []
       for (let index = 3; index < 10.5; index+=.5) {

@@ -5,7 +5,7 @@ import {Header} from 'react-native-elements';
 import {Connect,mapDispatchToProps,mapStateToProps} from '../Redux'; 
 import { findAllUsers } from '../Realm';
  
-
+ 
 class Home extends Component {
   menu_items=['sneakers','streetwear','watches','handbags'] ;
 

@@ -7,7 +7,7 @@ import { Colors, AwesomeIcon, Styles, ModalWant} from '../bootstrap';
 import { Connect,mapDispatchToProps,mapStateToProps } from '../Redux';
 import ImagePicker from 'react-native-image-picker';
 import { apiData, handleImageUpload } from '../functions';
-
+ 
 const { height } = Dimensions.get("window");
 
 class Details extends Component {

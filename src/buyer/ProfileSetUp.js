@@ -4,7 +4,6 @@ import { Avatar } from "react-native-elements";
 import { Colors, AwesomeIcon, Styles} from '../bootstrap';
 import {Connect,mapDispatchToProps,mapStateToProps} from '../Redux';
 
-
 const inputs = ['Username','Fullname'];
 
 class ProfileSetUp extends Component {

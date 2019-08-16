@@ -9,7 +9,7 @@ export default class Modall extends Component {
     this.state = {
     };
   }
-  
+   
   showModal=()=>{
       this.refs.modal.open();
   }

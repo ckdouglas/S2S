@@ -6,7 +6,7 @@ import {Colors,AwesomeIcon, Styles} from '../bootstrap';
  class Sell extends Component {
   
   menu_items = ['personal info','return address','seller 101','link social accounts'];
-  
+   
   constructor(props) {
     super(props);
     this.state = {

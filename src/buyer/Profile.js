@@ -4,7 +4,7 @@ import { AwesomeIcon, Styles, Colors} from '../bootstrap';
 import { deleteUsers } from '../Realm';
 import {Connect,mapDispatchToProps,mapStateToProps} from '../Redux';
 import { titleCase} from '../functions'
-
+ 
  
 class Profile extends Component {
   

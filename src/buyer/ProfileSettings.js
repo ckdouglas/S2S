@@ -6,7 +6,6 @@ import { titleCase } from '../functions';
 import { deleteUsers } from '../Realm';
 import {Connect,mapDispatchToProps,mapStateToProps} from '../Redux';
 
-
 class ProfileSettings extends Component {
   constructor(props) {
     super(props);

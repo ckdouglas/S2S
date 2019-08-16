@@ -9,7 +9,7 @@ export default class PhoneVerification extends Component {
     this.state = {
     };
   }
-
+ 
   render() {
     const {navigate,goBack} = this.props.navigation;
     return (

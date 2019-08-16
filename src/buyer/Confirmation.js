@@ -8,7 +8,7 @@ Avatarr  = (props)=>{
             <Avatar title={props.title} rounded size='large' containerStyle={{marginHorizontal:5}} titleStyle={{fontSize:18,color:props.color}}  overlayContainerStyle={{backgroundColor:'#000'}}/>
     )
 }
-
+ 
 export default class Confirmation extends Component {
   constructor(props) {
     super(props);

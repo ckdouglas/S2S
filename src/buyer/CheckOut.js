@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text,StyleSheet,TouchableWithoutFeedback,Image,TouchableHighlight,ScrollView } from 'react-native';
 import {Colors, AwesomeIcon} from '../bootstrap';
-
+     
 export default class CheckOut extends Component {
   constructor(props) {
     super(props);
@@ -9,7 +9,7 @@ export default class CheckOut extends Component {
       activePage:''
     };
   }
-
+ 
   componentWillMount(){
     this.setState({activePage:this.props.navigation.getParam('page')})
   }

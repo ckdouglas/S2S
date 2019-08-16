@@ -8,7 +8,7 @@ export default class Offer extends Component {
     this.state = {
     };
   }
-
+ 
   render() { 
     const {navigation} = this.props;
     const {navigate,goBack} = navigation;
