@@ -12,7 +12,6 @@ class Search extends Component {
     this.state = {
       search_key:'' ,
       wears_data:[]
-
     };
   } 
  
