@@ -1,22 +1,29 @@
 import Realm from 'realm';
+
 export const usersSchema = 's2sUsersSchema';
+
+
 export const users_Schema = {
     name: usersSchema,
     primaryKey:'_id',
     properties:{
         _id: 'string',
         email: 'string',
-        username: 'string'
+        username: 'string',
         // dateJoined:{type:'string', optional:true}
-        
+        phone_number:'string',
+        dob:'string',
     }
 }
+
+
 
 const databaseOptions = {
     path:'s2s.realm',
     schema:[users_Schema],
-    schemaVersion:1
+    schemaVersion:2
 }
+
 
 export const saveUser = user => new Promise((resolve, reject)=>{
     Realm.open(databaseOptions).then(realm =>{
@@ -32,6 +39,8 @@ export const updateUser = user => new Promise((resolve, reject)=>{
      Realm.open(databaseOptions).then(realm=>{
          realm.write(()=>{
               let userUpdate = realm.objectForPrimaryKey(usersSchema, user.ID);
+             if(user.phone_number) userUpdate.phone_number = user.phone_number;
+             if(user.dob)userUpdate.dob = user.dob;
              if(user.cartVisited)userUpdate.cartVisited = user.cartVisited;
              if(user.socialLogin == true)userUpdate.socialLogin = '';
              if(user.metaData)userUpdate.metaData = user.metaData;
@@ -39,6 +48,7 @@ export const updateUser = user => new Promise((resolve, reject)=>{
          })
      }).catch((e)=>reject(e))
 })
+
 
 export const findAllUsers = () => new Promise((resolve,reject)=>{
     Realm.open(databaseOptions).then(realm=>{
@@ -58,3 +68,4 @@ export const deleteUsers = () => new Promise((resolve,reject)=>{
         reject(e)
     })
 })
+

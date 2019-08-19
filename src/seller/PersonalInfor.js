@@ -4,7 +4,7 @@ import {Colors,AwesomeIcon,IonicIcon} from '../bootstrap';
 import DatePicker from 'react-native-datepicker';
 import { Connect,mapDispatchToProps,mapStateToProps } from '../Redux';
 import {titleCase} from '../functions'
-
+import { updateUser } from '../Realm'
 
 
 class PersonalInfor extends Component {
@@ -18,7 +18,8 @@ class PersonalInfor extends Component {
   }
 
   componentDidMount(){
-    this.setState({name:this.props.user.username})
+    this.setState({name:this.props.user.username,})
+    alert(this.props.user.phone_number)
   }
 
   checkEntries(){
@@ -84,6 +85,9 @@ class PersonalInfor extends Component {
                   },
                   dateInput: {
                     marginLeft: 36,
+                  },
+                  dateText:{
+                    color:Colors.white,
                   }
                 }}
                 onDateChange={(date) => {this.setState({date: date})}}
@@ -91,12 +95,13 @@ class PersonalInfor extends Component {
               </View>
           </View>
         </View>
-        <TouchableOpacity onPress={()=>goBack()}>
-          <View style={[this.checkEntries()?{borderTopColor:Colors.white}:{color:'gray'},{height:50,borderTopWidth:1,alignItems:'center',justifyContent:'center'}]}>
+        <TouchableOpacity onPress={()=>updateUser({ID:user._id,phone_number:phone,dob:date})
+                                      .then().catch(err=>alert(err))} 
+              disabled={this.checkEntries()?false:true}>
+          <View style={[this.checkEntries()?{borderTopColor:Colors.white}:{color:'gray',},{height:50,borderTopWidth:1,alignItems:'center',justifyContent:'center'}]}>
                 <Text style={this.checkEntries()?{color:Colors.white}:{color:'gray'}}>SUBMIT</Text>
           </View>
         </TouchableOpacity>
-
       </View>
       </ScrollView> 
     );
