@@ -27,7 +27,8 @@ import ProfileSettings from './buyer/ProfileSettings';
 import Auth_ from './seller/Auth_';
 import PersonalInfor from './seller/PersonalInfor';
 import ReturnAddress from './seller/ReturnAddress';
-import  Seller101 from './seller/Seller101'
+import  Seller101 from './seller/Seller101';
+import Selling from './seller/Selling';
 
 // components
 import AwesomeIcon from './common/components/AwesomeIcon';
@@ -41,7 +42,7 @@ export {
     App_Name, Colors, Styles,
     /* screens */
     Welcome, Sign_Up, PasswordReset, ProfileSetUp, Home, Browse, Search, Sell, Profile, PhoneVerification, UserPersonalization,
-    Confirmation, Details, CheckOut, MoreSizes, Offer, OwnItem, ViewWear,ProfileSettings,
+    Confirmation, Details, CheckOut, MoreSizes, Offer, OwnItem, ViewWear,ProfileSettings, Selling,
 
     Auth_,PersonalInfor,ReturnAddress,Seller101,
     /* components  */

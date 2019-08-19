@@ -7,7 +7,7 @@ import {Connect,mapDispatchToProps,mapStateToProps} from './Redux';
 
 import {
   Welcome, Sign_Up ,PasswordReset,ProfileSetUp, Home, Browse, Search, Sell, Profile, PhoneVerification, UserPersonalization, Confirmation, Details,
-  CheckOut, MoreSizes, Offer, OwnItem, ViewWear, ProfileSettings,
+  CheckOut, MoreSizes, Offer, OwnItem, ViewWear, ProfileSettings, Selling,
   
   Auth_ ,PersonalInfor,ReturnAddress, Seller101,
   
@@ -71,11 +71,12 @@ const AppNavigator = createStackNavigator({
     OwnItem:{screen:OwnItem},
     ViewWear:{screen:ViewWear},
     ProfileSettings:{screen:ProfileSettings},
-
+    
     Auth_:{screen:Auth_},
     PersonalInfor:{screen:PersonalInfor},
     ReturnAddress:{screen:ReturnAddress},
-    Seller101:{screen:Seller101}
+    Seller101:{screen:Seller101},
+    Selling:{screen:Selling},
 
 },{
     headerMode:'none',
@@ -94,6 +95,7 @@ class Application extends Component {
       apiData({action: 'get_shoes'}).then(data=>{
         this.props.setShoes(data)
       }).catch(err=>alert(err));
+      
       apiData({action:'get_wears'}).then(data=>{
         this.props.setWears(data)
       }).catch(err=>alert(err))

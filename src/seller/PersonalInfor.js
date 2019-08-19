@@ -1,19 +1,36 @@
 import React, { Component } from 'react';
 import { View, Text , StyleSheet,TouchableOpacity,StatusBar,TextInput,ScrollView} from 'react-native';
 import {Colors,AwesomeIcon,IonicIcon} from '../bootstrap';
+import DatePicker from 'react-native-datepicker';
 import { Connect,mapDispatchToProps,mapStateToProps } from '../Redux';
 import {titleCase} from '../functions'
+
 
 
 class PersonalInfor extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      date:'',
+      name:'',
+      phone:'',
     };
   }
+
+  componentDidMount(){
+    this.setState({name:this.props.user.username})
+  }
+
+  checkEntries(){
+    if(this.state.date && this.state.name && this.state.phone)
+      return true;
+    return false;
+    
+  };
   render() {
-    const {user, navigation} = this.props;
+    const { user, navigation} = this.props;
     const { navigate, goBack} = navigation;
+    const { name, date, phone } = this.state;
     return (
       <ScrollView contentContainerStyle={{flexGrow:1}}>
       <View style={{flex:1,backgroundColor:Colors.black}}>
@@ -26,7 +43,6 @@ class PersonalInfor extends Component {
             </TouchableOpacity>
         </View>
         <View style={{flex:1,}}>
-
           <View style={{height:130,borderBottomColor:Colors.border_color,borderBottomWidth:1}}>
           <Text style={{fontSize:15,textAlign:'center',color:Colors.white,marginTop:20,marginHorizontal:20}}>
             This info is used to verify identity and deposit earnings after your sneakers sell.
@@ -34,18 +50,55 @@ class PersonalInfor extends Component {
           </Text>
           </View>
           <View style={{marginHorizontal:30, paddingTop:30}}>
-              <TextInput placeholder={'Full Legal Name'} value={ titleCase(user.username)} placeholderTextColor={'gray'} style={{height: 40,color:Colors.white, borderBottomColor: 'gray', borderBottomWidth: 1}}/> 
+              <TextInput 
+                placeholder={'Full Legal Name'} value={ titleCase(name)} 
+                placeholderTextColor={'gray'}
+                style={{height: 40,color:Colors.white, borderBottomColor: 'gray', borderBottomWidth: 1}}
+                onChangeText={(text)=>this.setState({name:text})}
+               /> 
               <View style={{flexDirection:'row',marginTop:20}}>
-              <TextInput placeholder={'Phone Number'} placeholderTextColor={'gray'} style={{height: 40,color:Colors.white,width:'50%',marginRight:2,borderBottomColor: 'gray', borderBottomWidth: 1}}/> 
-              <TextInput placeholder={'Birthdate'} placeholderTextColor={'gray'} style={{height: 40,color:'gray',width:'50%',marginLeft:2,borderBottomColor: 'gray', borderBottomWidth: 1}}/> 
+              <TextInput 
+                placeholder={'Phone Number'}  
+                placeholderTextColor={'gray'} 
+                keyboardType="phone-pad" 
+                style={{height: 40,color:Colors.white,width:'50%',marginRight:2,borderBottomColor: 'gray', borderBottomWidth: 1}}
+                onChangeText={(text)=>this.setState({phone:text})}
+              /> 
+              <DatePicker 
+                style={{height: 40,color:Colors.white,width:'50%',marginRight:2,borderBottomColor: 'gray', borderBottomWidth: 1}}
+                date={date}
+                date={this.state.date}
+                mode="date"
+                placeholder="Select Date"
+                format="YYYY-MM-DD"
+                // minDate="2016-05-01"
+                // maxDate="2016-06-01"
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                customStyles={{
+                  dateIcon: {
+                    position: 'absolute',
+                    left: 0,
+                    top: 4,
+                    marginLeft: 0
+                  },
+                  dateInput: {
+                    marginLeft: 36,
+                  }
+                }}
+                onDateChange={(date) => {this.setState({date: date})}}
+              />
               </View>
           </View>
         </View>
-        <View style={{height:50,borderTopColor:'gray',borderTopWidth:1,alignItems:'center',justifyContent:'center'}}>
-              <Text style={{color:'gray'}}>SUBMIT</Text>
-        </View>
+        <TouchableOpacity onPress={()=>goBack()}>
+          <View style={[this.checkEntries()?{borderTopColor:Colors.white}:{color:'gray'},{height:50,borderTopWidth:1,alignItems:'center',justifyContent:'center'}]}>
+                <Text style={this.checkEntries()?{color:Colors.white}:{color:'gray'}}>SUBMIT</Text>
+          </View>
+        </TouchableOpacity>
+
       </View>
-      </ScrollView>
+      </ScrollView> 
     );
   }
 }

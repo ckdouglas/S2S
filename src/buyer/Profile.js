@@ -20,13 +20,13 @@ class Profile extends Component {
 
     const menu_items = [
       {title:'Buying',icon:'shopping-cart', page:'Buying'},
-      { title:'Selling',icon:'tag'},
+      {title:'Selling',icon:'tag',page:'Selling'},
       {title:'Portfolio',icon:'industry' },
       {title:'Following', icon:'check-circle' },
-      { title:'Blog',  icon:'book'},
+      {title:'Blog',  icon:'book'},
       {title:'FAQ',icon:'info-circle'},
       {title:'How It Works',icon:'sliders' },
-      {title:'Reviews', icon:'star' },
+      {title:'Reviews', icon:'star'},
       {title:'US$ USD',icon:'money'},
       {title:'Log out',icon:'sign-out'},
     ];
@@ -45,6 +45,7 @@ class Profile extends Component {
         </View>
         {user?
         <View>
+
         <View style={[Styles.bottom_border,{height:70}]}>
           <TouchableOpacity onPress={()=>navigate('ProfileSettings')}>
             <Text style={[Styles.header_title,{fontWeight: 'bold',fontSize:20,paddingTop:10,paddingLeft:20}]}>{titleCase(user.username)}</Text>
@@ -57,7 +58,6 @@ class Profile extends Component {
                 if(map_item.title =='Log out')
                   deleteUsers().then(()=>setUser('')).catch(e=>alert(e))
                 else navigate(map_item.page)
-
               }} key={index} style={[{flexDirection:'row',alignItems:'center',height:60,width:100+'%'}]}>
                 <View style={{width:'12%',paddingLeft:10}}>
                 <AwesomeIcon name={map_item.icon} size={20}/>
