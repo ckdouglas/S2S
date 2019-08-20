@@ -13,11 +13,23 @@ import {Colors,AwesomeIcon, Styles} from '../bootstrap';
     };
   }
 
+  componentDidMount(){
+    const { user,setInfo} = this.props;
+    if (user){
+      if (user.phone_number && user.dob) {
+        setInfo(true)
+      }
+    }
+  }
+
   render() {
     const { user,navigation} = this.props;
     const { navigate } = navigation;
     buttons = ['sign up','login'];
 
+    IconColor=(index)=>{
+      return ((index==0 && user.dob && user.phone_number) ||(index ==1 && user.return_address)||(index==2 && user.seller101)||(index==3 && user.linked_acccount)?['check',Colors.green,Colors.white]:['plus-circle',Colors.gray,Colors.gray])
+    } 
     return (
       user?
       <View style={{flex:1,backgroundColor:Colors.black}}>
@@ -37,14 +49,15 @@ import {Colors,AwesomeIcon, Styles} from '../bootstrap';
             <View style={{width:'100%',alignItems:'center'}} >
                 {
                     this.menu_items.map((item,index)=>(
+                      
                       <View style={{width:'90%',borderBottomWidth:1,borderBottomColor:Colors.border_color,marginHorizontal:20}}>
                       <TouchableOpacity  onPress={()=>navigate(index==0?'PersonalInfor':index==1?'ReturnAddress':index==2?'Seller101':'SocialAccounts')}> 
                         <View key={index} style={{width:'90%',flexDirection:'row',paddingLeft:20,height:60}}> 
                                   <View style={{width:'15%',alignItems:'center',justifyContent:'center'}}>
-                                  <AwesomeIcon name={'plus-circle'} size={20} color={Colors.gray}/>    
+                                  <AwesomeIcon name={IconColor(index)[0]} size={20} color={IconColor(index)[1]}/>    
                                   </View>
                                   <View style={{alignItems:'center',justifyContent:'center'}}>
-                                      <Text style={{color:Colors.gray,fontSize:12}}>{item.toUpperCase()}</Text> 
+                                      <Text style={{color:IconColor(index)[2],fontSize:12}}>{item.toUpperCase()}</Text> 
                                   </View>
                         </View>
                         </TouchableOpacity>

@@ -1,7 +1,5 @@
 import Realm from 'realm';
-
 export const usersSchema = 's2sUsersSchema';
-
 
 export const users_Schema = {
     name: usersSchema,
@@ -16,14 +14,11 @@ export const users_Schema = {
     }
 }
 
-
-
 const databaseOptions = {
     path:'s2s.realm',
     schema:[users_Schema],
     schemaVersion:1
 }
-
 
 export const saveUser = user => new Promise((resolve, reject)=>{
     Realm.open(databaseOptions).then(realm =>{
@@ -33,7 +28,6 @@ export const saveUser = user => new Promise((resolve, reject)=>{
         })
     }).catch((e)=>reject(e))
 })
-
 
 export const updateUser = user => new Promise((resolve, reject)=>{
      Realm.open(databaseOptions).then(realm=>{
@@ -49,7 +43,6 @@ export const updateUser = user => new Promise((resolve, reject)=>{
      }).catch((e)=>reject(e))
 })
 
-
 export const findAllUsers = () => new Promise((resolve,reject)=>{
     Realm.open(databaseOptions).then(realm=>{
         resolve(JSON.parse(JSON.stringify(Array.from(realm.objects(usersSchema)))))
@@ -58,14 +51,13 @@ export const findAllUsers = () => new Promise((resolve,reject)=>{
     })
 })
 
-export const deleteUsers = () => new Promise((resolve,reject)=>{
+export const deleteUsers = () => new Promise( (resolve,reject)=>{
     Realm.open(databaseOptions).then(realm=>{
          realm.write(()=>{
             realm.delete(realm.objects(usersSchema));
             resolve('deleted')
          });
-    }).catch((e)=>{
+    } ).catch( (e)=>{
         reject(e)
     })
-
-    
+})
