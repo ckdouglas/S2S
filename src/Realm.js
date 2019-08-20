@@ -11,8 +11,8 @@ export const users_Schema = {
         email: 'string',
         username: 'string',
         // dateJoined:{type:'string', optional:true}
-        phone_number:'string',
-        dob:'string',
+        phone_number:{type:'string',optional:true},
+        dob:{type:'string',optional:true},
     }
 }
 
@@ -21,7 +21,7 @@ export const users_Schema = {
 const databaseOptions = {
     path:'s2s.realm',
     schema:[users_Schema],
-    schemaVersion:2
+    schemaVersion:1
 }
 
 
@@ -67,5 +67,5 @@ export const deleteUsers = () => new Promise((resolve,reject)=>{
     }).catch((e)=>{
         reject(e)
     })
-})
 
+    

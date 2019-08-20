@@ -18,8 +18,10 @@ class PersonalInfor extends Component {
   }
 
   componentDidMount(){
-    this.setState({name:this.props.user.username,})
-    alert(this.props.user.phone_number)
+    user = this.props.user;
+    if (user.phone_number) this.setState({phone:user.phone_number});
+    if (user.dob) this.setState({date:user.dob});
+    this.setState({name:user.username});
   }
 
   checkEntries(){
@@ -62,13 +64,13 @@ class PersonalInfor extends Component {
                 placeholder={'Phone Number'}  
                 placeholderTextColor={'gray'} 
                 keyboardType="phone-pad" 
+                value={phone}
                 style={{height: 40,color:Colors.white,width:'50%',marginRight:2,borderBottomColor: 'gray', borderBottomWidth: 1}}
                 onChangeText={(text)=>this.setState({phone:text})}
               /> 
               <DatePicker 
                 style={{height: 40,color:Colors.white,width:'50%',marginRight:2,borderBottomColor: 'gray', borderBottomWidth: 1}}
                 date={date}
-                date={this.state.date}
                 mode="date"
                 placeholder="Select Date"
                 format="YYYY-MM-DD"
