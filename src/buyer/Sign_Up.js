@@ -7,7 +7,7 @@ import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import firebase from 'react-native-firebase'; 
 import { apiData } from '../functions';
 import { saveUser,findAllUsers} from '../Realm';
-import { Bars } from 'react-native-loader'
+import Spinner from 'react-native-loading-spinner-overlay';
 
 GoogleSignin.configure({
   scopes: ['https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/profile.agerange.read','https://www.googleapis.com/auth/user.addresses.read','https://www.googleapis.com/auth/userinfo.profile'], // what API you want to access on behalf of the user, default is email and profile
@@ -34,6 +34,7 @@ class Sign_Up extends Component {
       activePage:'',
       inputs:Inputs[1],
       loggedInUser:'',
+      spinner: false,
     }; 
   }    
 
@@ -49,7 +50,8 @@ social_auth = async(button)=>{
       const result = await LoginManager.logInWithReadPermissions(['public_profile', 'email']);
       if (result.isCancelled) {
         // handle this however suites the flow of your app
-        throw new Error('User cancelled request'); 
+        this.setState({spinner:false})
+        throw new Error('User cancelled request');
       }
       console.log(`Login success with permissions: ${result.grantedPermissions.toString()}`);
       // get the access token
@@ -57,6 +59,7 @@ social_auth = async(button)=>{
 
       if (!data) {
         // handle this however suites the flow of your app
+        this.setState({spinner:false})
         throw new Error('Something went wrong obtaining the users access token');
       }
   
@@ -97,7 +100,9 @@ social_auth = async(button)=>{
     }
   }
 }  
+
 email_auth(){   
+    this.setState({spinner:true})
     var {inputs,activePage} = this.state;
     if( activePage == 'signup' && !this.validateEmail(inputs[1].value)  )
       this.updateIfError(1,'Please enter a valid email');
@@ -112,6 +117,7 @@ email_auth(){
 }
 
 authentication(action,credentials){
+  this.setState({spinner:true})  
   apiData({
     action:action,
     data:credentials
@@ -178,7 +184,12 @@ validateEmail(text){
                               <Text style={{textAlign:'center',}}>{text[0]}<Text style={{color:Colors.black}}> {text[1]}</Text></Text>
                             </TouchableOpacity>)
     return (
-      <View>
+      <View style={{flex:1}}>
+        <Spinner
+          visible={this.state.spinner}
+          textContent={'Authenticating...'}
+          textStyle={{color:Colors.white}}
+        />
          {activePage=='login'? 
             <View> 
             <View style={Styles.header}>
