@@ -16,7 +16,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-
+import com.devfd.RNGeocoder.RNGeocoderPackage;
 import com.facebook.FacebookSdk;
 import com.facebook.CallbackManager;
 import com.facebook.appevents.AppEventsLogger;
@@ -53,7 +53,8 @@ public class MainApplication extends Application implements ReactApplication {
             new FBSDKPackage(mCallbackManager),
             new RealmReactPackage(),
             new VectorIconsPackage(),
-            new RNGestureHandlerPackage()
+            new RNGestureHandlerPackage(),
+            new RNGeocoderPackage()
       );
     }
 

@@ -4,7 +4,7 @@ import {Colors,AwesomeIcon,IonicIcon} from '../bootstrap';
 import DatePicker from 'react-native-datepicker';
 import { Connect,mapDispatchToProps,mapStateToProps } from '../Redux';
 import {titleCase, apiData} from '../functions'
-import { updateUser } from '../Realm'
+import { updateUser } from '../Realm';
 
 
 class PersonalInfor extends Component {

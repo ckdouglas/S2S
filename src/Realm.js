@@ -11,6 +11,7 @@ export const users_Schema = {
         // dateJoined:{type:'string', optional:true}
         phone_number:{type:'string',optional:true},
         dob:{type:'string',optional:true},
+        return_address:{type:'string',optional:true},
     }
 }
 
@@ -35,7 +36,7 @@ export const updateUser = user => new Promise((resolve, reject)=>{
               let userUpdate = realm.objectForPrimaryKey(usersSchema, user.ID);
              if(user.phone_number) userUpdate.phone_number = user.phone_number;
              if(user.dob)userUpdate.dob = user.dob;
-             if(user.cartVisited)userUpdate.cartVisited = user.cartVisited;
+             if(user.return_address)userUpdate.return_address = user.return_address;
              if(user.socialLogin == true)userUpdate.socialLogin = '';
              if(user.metaData)userUpdate.metaData = user.metaData;
              resolve(userUpdate)

@@ -4,9 +4,7 @@ import {Connect,mapDispatchToProps,mapStateToProps} from '../Redux';
 import {Colors,AwesomeIcon, Styles} from '../bootstrap';
 
  class Sell extends Component {
-  
   menu_items = ['personal info','return address','seller 101','link social accounts'];
-   
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +24,7 @@ import {Colors,AwesomeIcon, Styles} from '../bootstrap';
     const { user,navigation} = this.props;
     const { navigate } = navigation;
     buttons = ['sign up','login'];
-
+    alert(JSON.stringify(user))
     IconColor=(index)=>{
       return ((index==0 && user.dob && user.phone_number) ||(index ==1 && user.return_address)||(index==2 && user.seller101)||(index==3 && user.linked_acccount)?['check',Colors.green,Colors.white]:['plus-circle',Colors.gray,Colors.gray])
     } 
