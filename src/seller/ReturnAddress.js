@@ -25,7 +25,7 @@ class ReturnAddress extends Component {
 
   componentWillMount(){
     
-    if(this.props.user.return_address){
+    if(this.props.user.return_address != null){
       this.setState({location:JSON.parse(this.props.user.return_address)})
       if (this.state.location) this.setState({available:true})
     }

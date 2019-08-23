@@ -29,6 +29,7 @@ import PersonalInfor from './seller/PersonalInfor';
 import ReturnAddress from './seller/ReturnAddress';
 import  Seller101 from './seller/Seller101';
 import Selling from './seller/Selling';
+import Seller102 from './seller/Seller102'
 
 // components
 import AwesomeIcon from './common/components/AwesomeIcon';
@@ -44,7 +45,7 @@ export {
     Welcome, Sign_Up, PasswordReset, ProfileSetUp, Home, Browse, Search, Sell, Profile, PhoneVerification, UserPersonalization,
     Confirmation, Details, CheckOut, MoreSizes, Offer, OwnItem, ViewWear,ProfileSettings, Selling,
 
-    Auth_,PersonalInfor,ReturnAddress,Seller101,
+    Auth_,PersonalInfor,ReturnAddress,Seller101,Seller102,
     /* components  */
     AwesomeIcon, IonicIcon,
 
