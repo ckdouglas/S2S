@@ -2,7 +2,16 @@
 import React from 'react';
 import { View, Image, Dimensions, Text, TouchableWithoutFeedback, StyleSheet, TouchableOpacity} from 'react-native';
 import { Transition, FluidNavigator } from 'react-navigation-fluid-transitions';
-import { Colors, AwesomeIcon, IonicIcon} from '../bootstrap';
+import { Colors, AwesomeIcon, IonicIcon,Styles} from '../bootstrap';
+import {IndicatorViewPager,PagerDotIndicator} from 'rn-viewpager';
+import { Connect,mapDispatchToProps,mapStateToProps } from '../Redux';
+import { apiData } from '../functions';
+import { updateUser } from '../Realm';
+
+images_damaged=['j13.png','j13.png','j13.png','j13.png'];
+
+nav={};
+_user={};
 
 const styles = StyleSheet.create({
   container: {
@@ -39,13 +48,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#000000',
     flex: 1,
   },
-  shoe2: {
-    width: 291,
-    height: 200,
-    position: 'absolute',
-    left: Dimensions.get('window').width * 0.5 - (291 / 2),
-    top: 60,
-  },
   paper2: {
     backgroundColor: '#000000',
     position: 'absolute',
@@ -58,13 +60,7 @@ const styles = StyleSheet.create({
     paddingTop: 70,
     padding: 10,
   },
-  price: {
-    color: '#FFF',
-    fontSize: 34,
-    fontFamily: 'Bebas Neue',
-    textAlign: 'center',
-    paddingTop: -55 + Dimensions.get('window').height * 0.5,
-  },
+ 
   headerContainer2: {
     padding: 20,
     justifyContent: 'flex-end',
@@ -72,45 +68,8 @@ const styles = StyleSheet.create({
     alignItems:'center',
     alignContent:'center'
   },
-  header2: {
-    color: '#444',
-    fontSize: 42,
-    textAlign: 'center',
-    fontFamily: 'Bebas Neue', 
-    marginBottom: -6,
-  },
-  subHeader2: {
-    color: '#444',
-    fontSize: 22,
-    textAlign: 'center',
-    fontFamily: 'Bebas Neue',
-  },
-  smallImageContainer: {
-    position: 'absolute',
-    left: 0,
-    top: Dimensions.get('window').height * 0.54,
-    bottom: 0,
-    right: 0,
-    alignItems: 'center',
-    paddingTop: 50,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginLeft: 80,
-    marginRight: 80,
-    margin: 30,
-  },
-  smallImageWrapper: {
-    width: Dimensions.get('window').width / 4,
-    height: Dimensions.get('window').width / 4,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#ECECEC',
-  },
-  smallImage: {
-    width: 90,
-    height: 50,
-  },
-      nav:{
+
+  nav:{
       height:50,
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -128,12 +87,22 @@ const styles = StyleSheet.create({
   }
 });
 
+setNavivation=(navigation)=>{
+   nav=navigation;
+}
+
+_renderDotIndicator=()=>{
+  return <PagerDotIndicator pageCount={3}
+  dotStyle={{backgroundColor:Colors.black}}
+  selectedDotStyle={{backgroundColor:Colors.white}}/>
+}
+
 const Screen1 = (props) => (
   <View style={styles.container}>
     <TouchableWithoutFeedback onPress={() => props.navigation.navigate('screen2')}>
       <View style={styles.top1}>
         <Transition appear="right" shared="image">
-          <Image style={styles.shoe1} source={require('../assets/images/j13.png')} />
+          <Image style={styles.shoe1} resizeMode={'contain'} source={require('../assets/images/j13.png')} />
         </Transition>
         <Transition appear="left">
           <View style={styles.headerContainer1}>
@@ -155,6 +124,12 @@ const Screen2 = (props) => (
          <Text/>
           <Text/>
          </View>
+         <Transition appear='top'>
+          <View style={{height:200, alignItems:'center',justifyContent:'center'}}>
+            {/* place an icon here */}
+            <Text style={{color:Colors.white}}>Icon Here</Text>
+          </View>
+         </Transition>
         <Transition appear="bottom">
           <View style={styles.paper2}>
               <View style={{alignItems:'center',justifyContent:'center',marginBottom:20}}>
@@ -192,12 +167,21 @@ const Screen3 = (props) => (
          </TouchableOpacity>
          <Text/>
           <Text/>
-         </View>
+      </View>
         <Transition appear="left">
-          <View style={{flex:1 ,backgroundColor:'red'}}> 
+          <View style={{flex:1}}> 
+          <IndicatorViewPager style={{flex:1,backgroundColor:Colors.white}} indicator={this._renderDotIndicator()}>
+                        {
+                          images_damaged.map((image,index)=>(
+                            <View style={{height:250,width:'100%'}}>
+                                <Image source={require('../assets/images/j13.png')} style={{flex:1,height:null,width:null,resizeMode:'cover'}}/> 
+                            </View>
+                          ))
+                        }
+                          
+           </IndicatorViewPager> 
           </View>
         </Transition>
-
         <Transition appear="bottom">
         <View style={{flex:1, justifyContent:"space-between",alignItems:'center'}}> 
         
@@ -220,10 +204,61 @@ const Screen3 = (props) => (
       </View>
   </View>
 );
+
+const Screen4 = (props) => (
+      <View style={styles.top1}>
+        <View style={{height:'10%',flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',paddingHorizontal:10,}}>
+          <TouchableOpacity onPress={()=>props.navigation.goBack()}>
+                <AwesomeIcon name={'angle-left'} size={25} color={Colors.white}/>
+          </TouchableOpacity>
+          <Text/>
+            <Text/>
+        </View>
+        <View style={{height:'20%',marginHorizontal:30,justifyContent:'space-around',borderBottomColor:Colors.white,borderBottomWidth:1}}>
+          <Transition appear="left">
+            <View style={{alignItems:'center'}}> 
+                <Text style={{color:Colors.white}} >Icon here</Text>
+            </View>
+          </Transition>
+          <Transition appear="right">
+            <View style={{alignItems:'center',}}> 
+               <Text style={{color:Colors.white,textAlign:'center'}} >Security is important to us.{'\n'}Please read our seller verification policy below</Text>
+            </View>
+          </Transition>
+        </View>  
+      
+        <View style={{height:'70%',alignItems:'center',justifyContent:"space-between"}}> 
+          <View style={{paddingTop:15}}>
+            <Text style={{color:Colors.white,textAlign:'center',fontSize:16,paddingTop:15}}>SELLER VERIFICATION POLICY</Text>
+            <Text style={{color:Colors.white,textAlign:'center',paddingTop:15}}>
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur
+            </Text>
+          </View>
+          <TouchableOpacity 
+                  onPress={()=>apiData({
+                    action:'update_user',
+                    data:{ID:_user._id,seller101:true}
+                  }).then(
+                    updateUser({ID:_user._id,seller101:true})
+                    .then(
+                      nav.goBack()
+                    )
+                  ).catch(err=>alert(err))}>
+                    <View style={styles.round_button}>
+                        <Text style={{color:Colors.white}}>I AGREE</Text>
+                    </View>
+          </TouchableOpacity>
+          </View>
+    
+      </View>
+);
+
 const Navigator = FluidNavigator({
   screen1: { screen: Screen1 },
   screen2: { screen: Screen2 },
   screen3: { screen: Screen3 },
+  screen4: { screen: Screen4 },
+
 
 }, {
   style: { backgroundColor: '#000000' },
@@ -236,11 +271,13 @@ class Seller101 extends React.Component {
   static router = Navigator.router;
 
   render() {
-    const { navigation } = this.props;
+    const { navigation, user } = this.props;
+    nav = navigation;
+    _user = user;
     return (
-      <Navigator navigation={navigation} />
+      <Navigator navigation={navigation}/>
     );
   }
 }
 
-export default Seller101;
+export default Connect(mapStateToProps,mapDispatchToProps)(Seller101)

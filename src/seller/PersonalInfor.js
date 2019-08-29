@@ -101,7 +101,9 @@ class PersonalInfor extends Component {
                                           data:{ID:user._id,phone_number:phone,dob:date}
                                         }).then(
                                           updateUser({ID:user._id,phone_number:phone,dob:date})
-                                          .then()
+                                          .then(
+                                            navigation.goBack()
+                                          )
                                         ).catch(err=>alert(err))} 
                                       
                                     

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,StatusBar,TouchableOpacity,ScrollView,Dimensions,TouchableWithoutFeedback} from 'react-native';
+import { View, Text, StyleSheet,StatusBar,TouchableOpacity,Alert,ScrollView,Dimensions,TouchableWithoutFeedback} from 'react-native';
 import MapView from 'react-native-maps';
 import {Colors, AwesomeIcon, IonicIcon} from '../bootstrap'
 import { Connect,mapDispatchToProps,mapStateToProps } from '../Redux';
@@ -22,9 +22,8 @@ class ReturnAddress extends Component {
       }
     };
   }
-
+  
   componentWillMount(){
-    
     if(this.props.user.return_address != null){
       this.setState({location:JSON.parse(this.props.user.return_address)})
       if (this.state.location) this.setState({available:true})
@@ -98,7 +97,9 @@ class ReturnAddress extends Component {
                                           data:{ID:user._id,return_address}
                                         }).then(
                                           updateUser({ID:user._id,return_address:return_address})
-                                          .then()
+                                          .then(
+                                            navigation.goBack()
+                                          )
                                         ).catch(err=>alert(err))} >
           <View style={{height:50,borderTopColor:'gray',borderTopWidth:1,alignItems:'center',justifyContent:'center'}}>
                 <Text style={available == false?{color:Colors.gray}:{color:Colors.white}}>CONTINUE</Text>

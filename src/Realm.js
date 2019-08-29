@@ -12,6 +12,7 @@ export const users_Schema = {
         phone_number:{type:'string',optional:true},
         dob:{type:'string',optional:true},
         return_address:{type:'string',optional:true},
+        seller101:{type:'bool',default:false,optional:true}
     }
 }
 
@@ -37,8 +38,7 @@ export const updateUser = user => new Promise((resolve, reject)=>{
              if(user.phone_number) userUpdate.phone_number = user.phone_number;
              if(user.dob)userUpdate.dob = user.dob;
              if(user.return_address)userUpdate.return_address = user.return_address;
-             if(user.socialLogin == true)userUpdate.socialLogin = '';
-             if(user.metaData)userUpdate.metaData = user.metaData;
+             if (user.seller101 == true) userUpdate.seller101 = user.seller101;
              resolve(userUpdate)
          })
      }).catch((e)=>reject(e))
