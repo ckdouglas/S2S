@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,StatusBar,TouchableOpacity,Alert,ScrollView,Dimensions,TouchableWithoutFeedback} from 'react-native';
+import { View, Text, StyleSheet,StatusBar,TouchableOpacity,Alert } from 'react-native';
 import MapView from 'react-native-maps';
 import {Colors, AwesomeIcon, IonicIcon} from '../bootstrap'
 import { Connect,mapDispatchToProps,mapStateToProps } from '../Redux';
@@ -60,8 +60,7 @@ class ReturnAddress extends Component {
       latitudeDelta: 0.015*5,
       longitudeDelta: 0.0121*5
     }
-
-
+    
     return (
       <View style={{flex:1,backgroundColor:Colors.black}}>
         <StatusBar backgroundColor={Colors.black}/>
@@ -88,10 +87,11 @@ class ReturnAddress extends Component {
         </View>
         <View style={styles.container}>
             <MapView style={styles.map} showsUserLocation={true} showsMyLocationButton={true} region={region}> 
-            <Marker coordinate={latLng} title={"Return Address"}/>
+                <Marker coordinate={latLng} title={"Return Address"}/>
             </MapView>
         </View>
         </View>
+        
         <TouchableOpacity disabled={available == false?true:false} onPress={()=>apiData({
                                           action:'update_user',
                                           data:{ID:user._id,return_address}
@@ -100,7 +100,7 @@ class ReturnAddress extends Component {
                                           .then(
                                             navigation.goBack()
                                           )
-                                        ).catch(err=>alert(err))} >
+                                        ).catch(err=>alert(err))}>
           <View style={{height:50,borderTopColor:'gray',borderTopWidth:1,alignItems:'center',justifyContent:'center'}}>
                 <Text style={available == false?{color:Colors.gray}:{color:Colors.white}}>CONTINUE</Text>
           </View>

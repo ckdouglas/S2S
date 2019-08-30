@@ -25,6 +25,11 @@ import {Colors,AwesomeIcon, Styles} from '../bootstrap';
     const { navigate } = navigation;
     buttons = ['sign up','login'];
     alert(JSON.stringify(user))
+    Status=()=>{
+      if(user.dob && user.phone_number) 
+        return true
+      return false
+    }
     IconColor=(index)=>{
       return ((index==0 && user.dob && user.phone_number) ||(index ==1 && user.return_address)||(index==2 && user.seller101)||(index==3 && user.linked_acccount)?['check',Colors.green,Colors.white]:['plus-circle',Colors.gray,Colors.gray])
     } 
@@ -64,7 +69,7 @@ import {Colors,AwesomeIcon, Styles} from '../bootstrap';
                 }
             </View>
         </View>
-          <TouchableOpacity>
+          <TouchableOpacity disabled={Status()} onPress={()=>navigate('SellRequest')}>
           <View style={{height:50, marginHorizontal:'5%',marginBottom:25,borderColor:Colors.gray,borderWidth:1,alignItems:'center',justifyContent:'center'}}>
                 <Text style={{color:Colors.border_color}}>SUBMIT</Text>
             </View>

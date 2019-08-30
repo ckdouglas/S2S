@@ -9,7 +9,7 @@ import {
   Welcome, Sign_Up ,PasswordReset,ProfileSetUp, Home, Browse, Search, Sell, Profile, PhoneVerification, UserPersonalization, Confirmation, Details,
   CheckOut, MoreSizes, Offer, OwnItem, ViewWear, ProfileSettings, Selling,
   
-  Auth_ ,PersonalInfor,ReturnAddress, Seller101,Seller102,
+  Auth_ ,PersonalInfor,ReturnAddress, Seller101,SellRequest,
   
   AwesomeIcon, Colors,
 } from './bootstrap';
@@ -77,7 +77,7 @@ const AppNavigator = createStackNavigator({
     ReturnAddress:{screen:ReturnAddress},
     Seller101:{screen:Seller101},
     Selling:{screen:Selling},
-    Seller102:{screen:Seller102}
+    SellRequest:{screen:SellRequest}
 
 },{
     headerMode:'none',

@@ -104,16 +104,18 @@ social_auth = async(button)=>{
 email_auth(){   
     this.setState({spinner:true})
     var {inputs,activePage} = this.state;
-    if( activePage == 'signup' && !this.validateEmail(inputs[1].value)  )
+    if( activePage == 'signup' && !this.validateEmail(inputs[1].value)  ){
       this.updateIfError(1,'Please enter a valid email');
-    else if(activePage == 'signup' && !this.validatePassword(inputs[2].value))
+      this.setState({spinner:false});
+    }else if(activePage == 'signup' && !this.validatePassword(inputs[2].value)){
       this.updateIfError(2,'Password MUST be more than seven characters and contains special characters');
-    else 
+      this.setState({spinner:false});
+    }else{ 
      this.authentication(activePage,{
       username: (activePage == 'signup'?inputs[0].value:null),
       email: (activePage == 'signup'?inputs[1].value:inputs[0].value),
       password:  (activePage == 'signup'?inputs[2].value:inputs[1].value)
-    })
+    })}
 }
 
 authentication(action,credentials){
@@ -122,10 +124,11 @@ authentication(action,credentials){
     action:action,
     data:credentials
   }).then(data=>{
-    if(data.index)
-     this.updateIfError(parseInt(data.index), data.message);
-    else
-      if (action == 'login' || action == 'social_auth') {
+    if(data.index){
+     this.updateIfError(parseInt(data.index), data.message)
+     this.setState({spinner:false});
+    }else{
+      if (action == 'login' || action == 'social_auth' || action == 'signup') {
       //check if a user is in realm then update/insert
         findAllUsers().then(users=>{
           if(users.length)
@@ -133,12 +136,12 @@ authentication(action,credentials){
           saveUser(data).then(user=>{
              this.props.setUser(user);
              this.props.navigation.goBack();
+             this.setState({spinner:false});
+             this.props.navigation.navigate('Home');
             }).catch(e=>alert(e));
         }).catch(e=>alert(e))
-      }else{
-        this.props.navigation.navigate('ProfileSetUp');
       }
-  }).catch(e=>alert('authentication::'+e))
+  }}).catch(e=>alert('authentication::'+e))
 }
 
 updateIfError(index,error){
@@ -187,7 +190,7 @@ validateEmail(text){
       <View style={{flex:1}}>
         <Spinner
           visible={this.state.spinner}
-          textContent={'Authenticating...'}
+          textContent={activePage == 'login'?'Authenticating':'Creating Account'}
           textStyle={{color:Colors.white}}
         />
          {activePage=='login'? 
@@ -219,7 +222,6 @@ validateEmail(text){
                   </TouchableOpacity>
                  </View>
                  <View style={{height:0.2*screenHeight}}/>
-   
                  <View style={{height:0.35*screenHeight,justifyContent:'center',marginBottom:20}}>
                   <Text style={{textAlign:'center',paddingBottom:15}}>Or you can connect using :</Text>
                      {
