@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; 
-import { View, Text, ScrollView,Dimensions,TextInput, StyleSheet,TouchableOpacity,Animated} from 'react-native';
+import { View, Text, ScrollView,Dimensions,TextInput, StyleSheet,TouchableOpacity,Animated,Alert} from 'react-native';
 import { Styles, AwesomeIcon, Colors } from '../bootstrap'
 import {Connect,mapDispatchToProps,mapStateToProps} from '../Redux';
 import {LoginManager,AccessToken, } from 'react-native-fbsdk';
@@ -67,13 +67,20 @@ social_auth = async(button)=>{
       const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken); 
       // login with credential
       const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
-      const user = firebaseUserCredential.user
+      const user = firebaseUserCredential.user;
+      const { displayName, email, phoneNumber,photoURL,uid} = user;
+      if(!email)
+         Alert.alert('No email found','We could not find valid email from your facebook account',[
+           {text:'Ok'}
+
+         ])
+      else
       this.authentication('social_auth',{
-        username:user.displayName,
-        email:user.email,
-        photoUrl:user.photoURL,
-        userPhone:user.phoneNumber,
-        password:user.uid,
+        username:displayName,
+        email:email,
+        photoUrl:photoURL,
+        userPhone:phoneNumber,
+        password:uid,
       })
       await LoginManager.logOut();
     } catch (e) {
@@ -87,6 +94,7 @@ social_auth = async(button)=>{
       // login with credential
       const firebaseUserCredential = await firebase.auth().signInWithCredential(credential);
       const user = firebaseUserCredential.user;
+      
       this.authentication('social_auth',{
         username:user.displayName,
         email:user.email,
@@ -119,7 +127,9 @@ email_auth(){
 }
 
 authentication(action,credentials){
+  const {setUser, navigation}=this.props;
   this.setState({spinner:true})  
+
   apiData({
     action:action,
     data:credentials
@@ -134,10 +144,10 @@ authentication(action,credentials){
           if(users.length)
              return;
           saveUser(data).then(user=>{
-             this.props.setUser(user);
-             this.props.navigation.goBack();
+             setUser(user);
+             navigation.goBack();
              this.setState({spinner:false});
-             this.props.navigation.navigate('Home');
+             navigation.navigate('Home');
             }).catch(e=>alert(e));
         }).catch(e=>alert(e))
       }

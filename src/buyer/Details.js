@@ -119,7 +119,7 @@ class Details extends Component {
                         <AwesomeIcon name={'upload'} size={20} color={Colors.black} style={{marginRight:15}}/>
                         <Text style={{fontSize:12,width:60,paddingVertical:5,textAlign:'center', borderWidth:1,borderColor:Colors.black,color:Colors.black}} >SELL</Text>
                       </View>
-                    </View>
+                  </View>
                   {
                     Object.keys(item).map((label,index)=>{
                       if ( !(label =='_id') && !(label=='images') && !(label=='brand_id') && !(label=='story') && !(label=='prices'))  {
@@ -182,8 +182,8 @@ class Details extends Component {
                             <View style={{flexDirection:'row',width:'100%',borderBottomColor:Colors.grey,borderBottomWidth:1,height:60,width:'100%',alignItems:'center' ,justifyContent:'center'}} >
                             <TouchableOpacity onPress={()=>navigate('CheckOut',{page:'check out'})}>
                               <View style={{flexDirection:'row',width:'100%',height:60,width:120,alignItems:'center' ,justifyContent:'space-between'}}>
-                              <Text style={{fontSize:25,color:Colors.white}}>{Object.keys(price)[0]}</Text>
-                              <Text style={{fontSize:25,color:Colors.white}}> ${price[(Object.keys(price)[0]).toString()]}</Text>
+                                <Text style={{fontSize:25,color:Colors.white}}>{Object.keys(price)[0]}</Text>
+                                <Text style={{fontSize:25,color:Colors.white}}> ${price[(Object.keys(price)[0]).toString()]}</Text>
                               </View>
                             </TouchableOpacity>
                             </View>

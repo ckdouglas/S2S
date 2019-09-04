@@ -7,7 +7,7 @@ import {Connect,mapDispatchToProps,mapStateToProps} from './Redux';
 
 import {
   Welcome, Sign_Up ,PasswordReset,ProfileSetUp, Home, Browse, Search, Sell, Profile, PhoneVerification, UserPersonalization, Confirmation, Details,
-  CheckOut, MoreSizes, Offer, OwnItem, ViewWear, ProfileSettings, Selling,
+  CheckOut, MoreSizes, Offer, OwnItem, ViewWear, ProfileSettings, Selling, Post,
   
   Auth_ ,PersonalInfor,ReturnAddress, Seller101,SellRequest,
   
@@ -17,7 +17,7 @@ import {
 const TabNavigator = createBottomTabNavigator({
   Home: Home,
   Browse: Browse,
-  Search: Search,
+  Search: Post,
   Sell: Sell,
   Profile:Profile,
 },{
@@ -77,14 +77,15 @@ const AppNavigator = createStackNavigator({
     ReturnAddress:{screen:ReturnAddress},
     Seller101:{screen:Seller101},
     Selling:{screen:Selling},
-    SellRequest:{screen:SellRequest}
+    SellRequest:{screen:SellRequest},
+    Post:{screen:Post},
 
 },{
     headerMode:'none',
     navigationOptions:{
         headerVisible: false
     },
-    initialRouteName: 'Home',
+    initialRouteName: 'Post',
     transitionConfig: () => fromRight(350),
 });
 
@@ -97,7 +98,7 @@ class Application extends Component {
       apiData({action: 'get_shoes'}).then(data=>{
         this.props.setShoes(data)
       }).catch(err=>alert(err));
-      
+
       apiData({action:'get_wears'}).then(data=>{
         this.props.setWears(data)
       }).catch(err=>alert(err))
@@ -106,6 +107,7 @@ class Application extends Component {
 render() {
     console.disableYellowBox = true;
     return (<AppContainer/>);
+
 }
 }
 export default Connect(mapStateToProps,mapDispatchToProps)(Application)

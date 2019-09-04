@@ -3,7 +3,7 @@ import {  View, Text, StatusBar,StyleSheet ,TouchableOpacity,Image,TouchableWith
 import {Connect,mapDispatchToProps,mapStateToProps} from '../Redux';
 import {Colors,AwesomeIcon, Styles} from '../bootstrap';
 
- class Sell extends Component {
+class Sell extends Component {
   menu_items = ['personal info','return address','seller 101','link social accounts'];
   constructor(props) {
     super(props);
@@ -25,10 +25,9 @@ import {Colors,AwesomeIcon, Styles} from '../bootstrap';
     const { navigate } = navigation;
     buttons = ['sign up','login'];
     alert(JSON.stringify(user))
+    
     Status=()=>{
-      if(user.dob && user.phone_number) 
-        return true
-      return false
+      return((user.username && user.dob && user.phone_number && user.return_address && user.seller101)?false:true)
     }
     IconColor=(index)=>{
       return ((index==0 && user.dob && user.phone_number) ||(index ==1 && user.return_address)||(index==2 && user.seller101)||(index==3 && user.linked_acccount)?['check',Colors.green,Colors.white]:['plus-circle',Colors.gray,Colors.gray])

@@ -19,6 +19,15 @@ export default StyleSheet.create({
         fontWeight: '500',
         color:Colors.black
     },
+  nav:{
+    height:50,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomColor: Colors.border_color,
+    borderBottomWidth: 1,
+    paddingHorizontal:10
+  },
     btn_f:{
         backgroundColor:Colors.facebook_blue,
       },
